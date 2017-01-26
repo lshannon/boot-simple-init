@@ -16,15 +16,14 @@ import com.lukeshannon.boot.model.Customer;
 @SpringBootApplication
 public class CommandLineRunnerApplication {
 	
-	public static Map<String,Customer> customers = new HashMap<String,Customer>();
-	
 	private static final Logger log = LoggerFactory
 			.getLogger(CommandLineRunnerApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(CommandLineRunnerApplication.class, args);
 	}
-
+	
+	public static Map<String,Customer> customers = new HashMap<String,Customer>();
 	
 	@Bean
 	public CommandLineRunner demo() {
@@ -35,7 +34,6 @@ public class CommandLineRunnerApplication {
 			Customer two = new Customer("george", 23, new Date());
 			customers.put(two.getName(), two);
 			log.info("Done inserting customers. Current Map Size: " +  customers.size());
-
 		};
 	}
 
