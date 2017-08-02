@@ -13,7 +13,7 @@ http://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/Comm
 public static Map<String,Customer> customers = new HashMap<String,Customer>();
 	
 @Bean
-	public CommandLineRunner demo() {
+	public CommandLineRunner init() {
 		return (args) -> {
 			log.info("Inserting two customers. Current Map Size: " +  customers.size());
 			Customer one = new Customer("gopika", 23, new Date());
@@ -25,6 +25,21 @@ public static Map<String,Customer> customers = new HashMap<String,Customer>();
 	}
 
 ```
+A 'ApplicationArguments' can be passed into the init to get any arguements passed in at start up.
+
+```java
+
+public CommandLineRunner init(ApplicationArguments params) {
+		return (args) -> {
+			for (String name : args.getOptionNames()){
+            		logger.info("arg-" + name + "=" + args.getOptionValues(name));
+       			}
+		};
+	}
+
+
+```
+
 As you can see, the data is a static member of the class.
 
 Upon start up we can see the data is initialized. There is a short sleep before the data is initialized, this is just out of my curiousity to see how slow loading of data would affect endpoint availability.
